@@ -1,5 +1,5 @@
 """
-Deepseek R1 generation with prompt, output the response text and the reasoning 
+Deepseek R1 generation with prompt, output the response text and the reasoning
 """
 
 import re, json, time, boto3
