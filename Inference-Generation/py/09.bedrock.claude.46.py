@@ -16,10 +16,10 @@ if hostname.startswith("ip-"):
 else:
     aws_session = boto3.Session(profile_name="shm_llm_test", region_name="us-east-1")
     bedrock_runtime = aws_session.client("bedrock-runtime", region_name="us-east-1")
+    
 
-system_prompt="""
-Human: can you write the python code for two sum?
-"""
+system_prompt="""Human: can you write the python code for two sum?"""
+
 
 def build_payload(prompt, max_tokens=6000, temperature=1.0, budget_tokens=2000):
     payload = {
