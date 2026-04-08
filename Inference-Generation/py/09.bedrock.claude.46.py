@@ -4,14 +4,18 @@
 Invoke claude 4 sonnet V1 from bedrock to make inference based on the prompt.
 """
 
-import re, json, boto3, time
+import re, json, boto3, time, socket
 
 model_id = "us.anthropic.claude-sonnet-4-5-20250929-v1:0"
 # model_id = "us.anthropic.claude-sonnet-4-6"
 
-aws_session = boto3.Session(profile_name="xxx", region_name="us-west-2")
-bedrock_runtime = aws_session.client("bedrock-runtime", region_name="us-west-2")
-
+hostname = socket.gethostname()
+if hostname.startswith("ip-"):
+    aws_session = boto3.Session(region_name="us-east-1")
+    bedrock_runtime = aws_session.client("bedrock-runtime", region_name="us-east-1")
+else:
+    aws_session = boto3.Session(profile_name="shm_llm_test", region_name="us-east-1")
+    bedrock_runtime = aws_session.client("bedrock-runtime", region_name="us-east-1")
 
 system_prompt="""
 Human: can you write the python code for two sum?
